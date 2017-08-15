@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Experiment</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="functionality.js" ></script>
+  </head>
+
+  <!--Logo-->
+  <body>
+    <div id="uclLogo">
+      <img src=images/uclLogo.png style="width: 100%; margin: 0 auto;" />
+    </div>
+
+
+    <!-- page 1 -->
+    <div class="content" id="page1">
+      <h1>Learning experiment</h1>
+
+      <div id="welcomePage">
+        <p>Thank you for wanting to participate in this experiment</p>
+        <p>This experiment is conducted by Thomas Verbeek (Thomas.verbeek.16@ucl.ac.uk)
+          under supervision of Maarten Speekenbrink (UCL). If you have any questions regarding the experiment, please do not hesitate to email the researcher.</p>
+        <p>In this experiment you will be rewarded money primarily based on your performance. For completing this HIT you will earn a base pay of $0.25, but you can earn up to $1 if you perform well.</p>
+        <p>The total duration of the experiment is estimated to be around 15 minutes. You must complete the HIT in one setting without any distractions. If you are not able to complete the HIT in a single sitting, we'd like to ask you to start the HIT another time. If the HIT is uncompleted it will time-out, and you will not be able to receive a payment. </p>
+        <p> We would like to ask your to now maximize your browser, and to not navigate away from the experiment until done. The experiment starts soon. However, it is required for you to read the Consent Form on the next page carefully, please.</p>
+
+        <div id="sideContainer">
+    			<a class="nextButton" id="nextButtonWelcome" href="#">Next</a>
+    		</div>
+
+      </div>
+
+
+      <div id="consentForm">
+        <h3>Consent Form</h3>
+        <div id="consentText">
+          <p>This study has been approved by the UCL Research Ethics Committee CPB/2014/005. The study is conducted by Thomas Verbeek under supervision of Dr. Maarten Speekenbrink at the Department of Experimental Psychology, University College London.</p>
+
+          <p>This study is not compulsory and it is up to you to decide whether or not to take part. If you choose not to participate it will involve no penalty or loss of benefits to which you are otherwise entitled. If you decide to take part you are still free to withdraw at any time and without giving a reason. No personal data will be collected, but unidentifiable demographic information such as age, gender and education level will be asked. All data will be collected and stored in accordance with the Data Protection Act 1998. </p>
+
+          <p>By continuing with the study, you are agreeing to the following:
+            <ul>
+              <li>I understand that I am free to withdraw from the study without penalty if I so wish and I consent to the processing of data collected from me for the purposes of this study only and that it will not be used for any other purpose.</li>
+              <li>I understand that all information will be treated as strictly confidential and handled in accordance with the provisions of the Data Protection Act 1998.</li>
+              <li>I understand that the information I have submitted will be published as a report.</li>
+              <li>Confidentiality and anonymity will be maintained and it will not be possible to identify me from any publications.</li>
+            </ul>
+            <p>Any questions about this experiments can be sent to 'thomas.verbeek.16@ucl.ac.uk'.</p>
+        </div>
+
+        <div>
+          <input type="checkbox" id="consentCheck">
+          <label for="consentCheck">
+            <b>I have read and understand the information above and agree to participate in the study.</b>
+          </label>
+          <p class="error" id="consentError">Please read through the consent form and tick
+            the box if you agree to the conditions.</p>
+          <p></p>
+
+          <div id="sideContainer">
+      			<a class="nextButton" id="nextButtonConsent" href="#">Next</a>
+      		</div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+
+      <!--page 2: demographics-->
+      <div class="content" id="page2">
+        <h3>Demographics</h3>
+
+        <div>
+          <p>It would be great if you can provide us with the following information.</p>
+        </div>
+
+
+        <div class="userForm" id="ageDiv">
+    			<fieldset>
+    				<legend>Age:</legend>
+    				<div>
+    				<input type="number" name="userAge" id="ua" min="15" max="80"/>
+    				</div>
+    			</fieldset>
+
+    			<div class="error" id="ageError">
+    				<p>We need your age for statistical purposes.</p>
+    			</div>
+    		</div>
+
+        <div class="userForm" id="userGender">
+  				<fieldset>
+  					<legend>Gender:</legend>
+  					<div>
+  						<div>
+  							<input type="radio" value="male" name="gender" id="man">
+  							<label for="man">Male</label>
+  						</div>
+
+  						<div>
+  							<input type="radio" value="female" name="gender" id="woman">
+  							<label for="woman">Female</label>
+  						</div>
+  					</div>
+
+  				</fieldset>
+  				<div class="error" id="genderError">
+  					<p>Please fill in your gender for statistical purposes.</p>
+  				</div>
+  			</div>
+
+        <div class="userForm" id="userEducation">
+          <fieldset>
+            <legend>Education:</legend>
+            <div>
+              <div>
+                <input type="radio" value="middleSchool" name="education" id="mSchool">
+                <label for="mSchool">Middle School</label>
+              </div>
+              <div>
+                <input type="radio" value="highSchool" name="education" id="hSchool">
+                <label for="hSchool">High School</label>
+              </div>
+              <div>
+                <input type="radio" value="undergrad" name="education" id="uDegree">
+                <label for="uDegree">Undergraduate Degree</label>
+              </div>
+              <div>
+                <input type="radio" value="postgrad" name="education" id="pDegree">
+                <label for="pDegree">Postgraduate Degree</label>
+              </div>
+            </div>
+          </fieldset>
+          <div class="error" id="eduError">
+            <p>We're sorry, but education is required.</p>
+          </div>
+        </div>
+
+        <div id="sideContainer">
+          <a class="nextButton" id="nextButtonDemographics" href="#">Next</a>
+        </div>
+
+      </div>
+
+
+
+      <!--page 3: instructions-->
+      <div class="content" id="page3">
+        <h3>Instructions stage 1</h3>
+
+        <div id="instructionsStage1Text">
+          <p>After clicking on the next button, the experiment starts immediately.
+            <br><br>You are presented with three pictures. One is a galaxy, the other two are aliens.
+            By clicking on one of the two aliens you choose to travel with that alien. You have 2 seconds to make a choice; if you are too late you won't receive any points for that trial.
+            With the alien you'll travel to a new planet where he looks for treasures. You'll go on a treasure hunt together and the alien will find different treasures.
+            <br><br>The treasures the alien finds are resources, and you'll sell these at a market. The prices of the resources go up and down. The points you earn are dependent on the price for which you can sell the resources.
+            <br><br>All points are worth a certain amount of money. For example, at pay-out, 10 points will be worth twice as much as 5 points. Again, every trial, you have 2 seconds to choose the alien you want to travel with.
+            <br><br> This continues until you have finished all the trials. After finishing the trials you will be automatically send to the next page.
+            <br><br>Good luck!</p>
+        </div>
+
+        <div>
+          <p></p>
+          <input type="checkbox" id="instructionsCheck">
+          <label for="instructionsCheck">
+            <b>I confirm that I have understood the instructions.</b>
+            </label>
+            <p></p>
+            <p class="error" id="instructionsError">Please re-read the instructions and tick
+            the box if you have understood them. If not, thank you for your effort but please quit the experiment.</p>
+            <p></p>
+
+            <div id="sideContainer">
+              <a class="nextButton" id="nextButtonInstructions" href="#">Next</a>
+            </div>
+
+        </div>
+
+      </div>
+
+
+      <!--page 4: trials stage 1 simple-->
+      <div class="content" id="page4">
+        <h3>Trials</h3>
+        <h4>Points: <span id="totalPoints">POINTS</span></h4>
+
+        <!--images configuration-->
+        <div id="backgroundImages">
+            <img class="image1" id="backgroundImage" src="#" width="400" height="320"/>
+        </div>
+
+        <div id="trialImages">
+            <div class="image">
+    					<a href="#" id="leftImage-wrap">
+    						<img class="image1" id="leftImage" src="#"  />
+    					</a>
+    				</div>
+
+            <div class="image">
+    					<a href="#" id="rightImage-wrap">
+    						<img class="image1" id="rightImage" src="#" />
+    					</a>
+    				</div>
+
+        </div>
+
+      </div>
+
+
+      <!--page 42: trials stage 2.1 complex-->
+      <div class="content" id="page42">
+        <h3>Trials</h3>
+        <h4>Points: <span id="totalPointsS2">POINTS</span></h4>
+
+        <!--images configuration-->
+        <div id="backgroundImages2">
+            <img class="image1" id="backgroundImage2" src="#" width="400" height="320"/>
+        </div>
+
+        <div id="trialImages2">
+            <div class="image">
+    					<a href="#" id="leftImage-wrap">
+    						<img class="image1" id="leftImage2" src="#"  />
+    					</a>
+    				</div>
+
+            <div class="image">
+    					<a href="#" id="rightImage-wrap">
+    						<img class="image1" id="rightImage2" src="#" />
+    					</a>
+    				</div>
+
+        </div>
+
+      </div>
+
+
+      <!--page 5: points-->
+      <div class="content" id="page5">
+        <p style="font-size:50px">You earned <span id="trialPoints" style="font-size:50px">trialPoints</span> points!</p>
+          <img class="image1" id="rewardImage" src="#" width="50%" height="50%" />
+      </div>
+
+
+
+
+      <!--page 6: instructions-->
+
+      <div class="content" id="page6">
+        <h3>Instructions stage 2</h3>
+        <h4>You earned a total of <span id="totalPointsInstructions">POINTS</span> points in the previous stage!</h4>
+
+        <div id='instructions2'>
+          <p>In the next stage, the final stage of this experiment, you are presented with a structure of an environment. Here, you will have to pre-configure the choices you make when you are in a certain state. The worth in points of every end state is indicated below the end-state with 'Reward x: points.'</p>
+          <p>You can see a state as being in a certain situation. The black arrows arrows indicate where a choice in a certain state leads to. For instance, if you are in State 1 and choose an action, the next state or pay off will be that where the arrow points to.</p>
+          <p>Finally, you have to click on the radio buttons below the picture to indicate your choices, and send press when you are happy.</p>
+          <p>The program simulates your choices by having you randomly start in one of the two start states. It then walks the path you have indicated, resulting in a pay-off. The points you earn once again determine your total pay-off in this experiment.</p>
+        </div>
+
+          <div>
+            <input type="checkbox" id="instructionsCheck2">
+            <label for="instructionsCheck2">
+              <b>I confirm that I have understood the instructions.</b>
+              </label>
+              <p></p>
+              <p class="error" id="instructionsError2">
+                Please re-read the instructions and tickthe box if you have understood them. If not, thank you for your effort but please quit the experiment.</p>
+              <p></p>
+
+          </div>
+
+          <div id="sideContainer">
+            <a class="nextButton" id="nextButtonInstructions2" href="#">Next</a>
+          </div>
+
+      </div>
+
+
+      <!--page 7: trials mb simple-->
+      <div class="content" id="page7">
+      <p style="font-size:20px">Points: <span id="totalPointsModelBased">POINTS</span></p>
+      <div id="imageSimple">
+          <div><img src=images/transition2Stage.png width="600" length="260"/></div>
+      </div>
+      <div id="points">
+          <div style="position: relative; display: inline-block; float: left; width: 60%; margin-right:-10%; font-size:20px"><b>Reward 1: <span id="reward1Simple">trialPoints</span></b></div>
+          <div style="position: relative; display: inline-block; float: right; width: 50%; font-size:20px"><b>Reward 2: <span id="reward2Simple">trialPoints</span></b></div>
+      </div>
+
+      <div class="userForm" id="statesSimple">
+        <fieldset>
+          <legend>If I'm in state 1 I want to take:</legend>
+          <div>
+            <div>
+              <input type="radio" value="a_s" name="actions1s" id="act_a_s">
+              <label for="act_a_s">Action A</label>
+            </div>
+            <div>
+              <input type="radio" value="b_s" name="actions1s" id="act_b_s">
+              <label for="act_b_s">Action B</label>
+            </div>
+
+            <p></p>
+            <p class="error" id="ErrorAB_s">
+              You need to choose one of the options. Remember, the action you take is is radio button you click if you start in state 1.</p>
+            <p></p>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>If I'm in state 2 I want to take:</legend>
+          <div>
+            <div>
+              <input type="radio" value="c_s" name="actions2s" id="act_c_s">
+              <label for="act_c_s">Action C</label>
+            </div>
+            <div>
+              <input type="radio" value="d_s" name="actions2s" id="act_d_s">
+              <label for="act_d_s">Action D</label>
+            </div>
+          </div>
+
+          <p></p>
+          <p class="error" id="ErrorCD_s">
+            You need to choose one of the options. Remember, the action you take is is radio button you click if you start in state 2.</p>
+          <p></p>
+        </fieldset>
+        <p></p>
+        </div>
+
+        <div id="sideContainer">
+          <a class="nextButton" id="nextButtonModelBasedSimple" href="#">Next</a>
+        </div>
+
+      </div>
+
+
+
+    <!--page 8: trials mb complex-->
+    <div class="content" id="page8">
+    <p style="font-size:20px">Points: <span id="totalPointsModelBasedComplex">POINTS</span></p>
+    <div id="imageSimple">
+      <img src=images/transition3Stage.png width="600" length="260"/>
+    </div>
+    <div id="points">
+        <div style="position: relative; display: inline-block; float: left; width: 30%; margin-right:-10%; font-size:15px"><b>Reward 1: <span id="reward1Complex">trialPoints</span></b></div>
+        <div style="position: relative; display: inline-block; float: left; width: 40%; margin-right:-10%; font-size:15px"><b>Reward 2: <span id="reward2Complex">trialPoints</span></b></div>
+        <div style="position: relative; display: inline-block; float: right; width: 30%; margin-right: 20%; font-size:15px"><b>Reward 3: <span id="reward3Complex">trialPoints</span></b></div>
+        <div style="position: relative; display: inline-block; float: right; width: 30%; margin-right: -55%; font-size:15px"><b>Reward 4: <span id="reward4Complex">trialPoints</span></b></div>
+    </div>
+
+
+    <div class="userForm" id="statesComplex1">
+      <fieldset>
+        <legend>If I'm in state 1 I want to take:</legend>
+        <div>
+          <div>
+            <input type="radio" value="a_c" name="actions1c" id="act_a_c">
+            <label for="act_a_c">Action A</label>
+          </div>
+          <div>
+            <input type="radio" value="b_c" name="actions1c" id="act_b_c">
+            <label for="act_b_c">Action B</label>
+          </div>
+
+          <p></p>
+          <p class="error" id="ErrorAB_c">
+            You need to choose one of the options. Remember, the action you take is is radio button you click if you move from state 1.</p>
+          <p></p>
+
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="userForm" id="statesComplex2">
+      <fieldset>
+        <legend>If I'm in state 2 I want to take:</legend>
+        <div>
+          <div>
+            <input type="radio" value="c_c" name="actions2c" id="act_c_c">
+            <label for="act_c_c">Action C</label>
+          </div>
+          <div>
+            <input type="radio" value="d_c" name="actions2c" id="act_d_c">
+            <label for="act_d_c">Action D</label>
+          </div>
+
+          <p></p>
+          <p class="error" id="ErrorCD_c">
+            You need to choose one of the options. Remember, the action you take is is radio button you click if you move from state 2.</p>
+          <p></p>
+
+        </div>
+      </fieldset>
+    </div>
+
+    <div id="sideContainer">
+      <a class="nextButton" id="nextButtonModelBasedComplex" href="#">Next</a>
+    </div>
+  </div>
+
+
+  <!--page 8: trials mb complex-->
+  <div class="content" id="page82">
+  <p style="font-size:20px">Points: <span id="totalPointsModelBasedComplex2">POINTS</span></p>
+  <div id="imageSimple">
+    <img src=images/transition3Stage.png width="600" length="260"/>
+  </div>
+  <div id="points">
+      <div style="position: relative; display: inline-block; float: left; width: 30%; margin-right:-10%; font-size:15px"><b>Reward 1: <span id="reward1Complex2">trialPoints</span></b></div>
+      <div style="position: relative; display: inline-block; float: left; width: 40%; margin-right:-10%; font-size:15px"><b>Reward 2: <span id="reward2Complex2">trialPoints</span></b></div>
+      <div style="position: relative; display: inline-block; float: right; width: 30%; margin-right: 20%; font-size:15px"><b>Reward 3: <span id="reward3Complex2">trialPoints</span></b></div>
+      <div style="position: relative; display: inline-block; float: right; width: 30%; margin-right: -55%; font-size:15px"><b>Reward 4: <span id="reward4Complex2">trialPoints</span></b></div>
+  </div>
+
+
+  <div class="userForm" id="statesComplex3">
+    <fieldset>
+      <legend>If I'm in state 3 I want to take:</legend>
+      <div>
+        <div>
+          <input type="radio" value="e_c" name="actions3c" id="act_e_c">
+          <label for="act_e_c">Action E</label>
+        </div>
+        <div>
+          <input type="radio" value="f_c" name="actions3c" id="act_f_c">
+          <label for="act_f_c">Action F</label>
+        </div>
+
+        <p></p>
+        <p class="error" id="ErrorEF_c">
+          You need to choose one of the options. Remember, the action you take is is radio button you click if you move from state 3.</p>
+        <p></p>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="userForm" id="statesComplex4">
+    <fieldset>
+      <legend>If I'm in state 4 I want to take:</legend>
+      <div>
+        <div>
+          <input type="radio" value="g_c" name="actions4c" id="act_g_c">
+          <label for="act_g_c">Action G</label>
+        </div>
+        <div>
+          <input type="radio" value="h_c" name="actions4c" id="act_h_c">
+          <label for="act_h_c">Action H</label>
+        </div>
+
+        <p></p>
+        <p class="error" id="ErrorGH_c">
+          You need to choose one of the options. Remember, the action you take is is radio button you click if you move from state 4.</p>
+        <p></p>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="userForm" id="statesComplex5">
+    <fieldset>
+      <legend>If I'm in state 5 I want to take:</legend>
+      <div>
+        <div>
+          <input type="radio" value="i_c" name="actions5c" id="act_i_c">
+          <label for="act_i_c">Action I</label>
+        </div>
+        <div>
+          <input type="radio" value="j_c" name="actions5c" id="act_j_c">
+          <label for="act_j_c">Action J</label>
+        </div>
+
+        <p></p>
+        <p class="error" id="ErrorIJ_c">
+          You need to choose one of the options. Remember, the action you take is is radio button you click if you move from state 5.</p>
+        <p></p>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="userForm" id="statesComplex6">
+    <fieldset>
+      <legend>If I'm in state 6 I want to take:</legend>
+      <div>
+        <div>
+          <input type="radio" value="k_c" name="actions6c" id="act_k_c">
+          <label for="act_k_c">Action K</label>
+        </div>
+        <div>
+          <input type="radio" value="l_c" name="actions6c" id="act_l_c">
+          <label for="act_l_c">Action L</label>
+        </div>
+
+        <p></p>
+        <p class="error" id="ErrorKL_c">
+          You need to choose one of the options. Remember, the action you take is is radio button you click if you move from state 6.</p>
+        <p></p>
+
+      </div>
+    </fieldset>
+  </div>
+
+    <div id="sideContainer">
+      <a class="nextButton" id="nextButtonModelBasedComplex2" href="#">Next</a>
+    </div>
+  </div>
+
+
+    <!--page 9: points model-based-->
+    <div class="content" id="page9">
+      <p style="font-size:50px">You earned <span id="trialPointsModelBased" style="font-size:50px">trialPoints</span> points!</p>
+    </div>
+
+
+    <!--page 10: closing page-->
+    <div class="content" id="page10">
+      <div id="endText">
+        <h2>Thank you!</h2>
+          <p>The experiment is now over. We appreciate that you took part!</p>
+          <p>In total you earned <span id="overallTotalPoints">TOTALPOINTS</span> points, this entitles you to $<span id="payOutTrials">MONEY</span> bonus. This will be transferred to you after your HIT is approved.</p>
+          <p>This study aims to research how people learn and perform in repeated environments with different rewards.
+            Again, if you have any questions or comments, please send an email to: <a href="mailto:thomas.verbeek.16@ucl.ac.uk" class="email">'thomas.verbeek.16@ucl.ac.uk'</a>.</p>
+          <p>Make sure to copy and paste this code to MTurk to get the HIT approved: <br><span id="approvalCode">CODE</span></p>
+          <p>You can close the browser now.</p>
+
+      </div>
+
+
+    </div>
